@@ -2,116 +2,73 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Joe Create Name FB</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generator Nama Pria Indonesia</title>
   <style>
     body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background-image: url('https://i.ibb.co/vvpJFWX/dark-anime-style-bg.jpg'); /* FIX URL BACKGROUND */
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-      padding: 40px 20px;
-      backdrop-filter: blur(4px);
-    }
-
-    h1 {
-      margin-bottom: 20px;
-      font-size: 26px;
-      font-weight: 600;
+      font-family: Arial, sans-serif;
       text-align: center;
-      text-shadow: 0 0 6px rgba(255,255,255,0.2);
+      padding: 50px;
+      background: #f5f5f5;
     }
-
-    .nama-box {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      padding: 20px;
-      border-radius: 12px;
-      width: 100%;
-      max-width: 500px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.3);
-      margin-bottom: 20px;
-      min-height: 200px;
+    h1 {
+      color: #333;
     }
-
-    .nama-item {
-      padding: 6px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-    }
-
     button {
-      background-color: rgba(255,255,255,0.1);
-      color: #fff;
+      padding: 12px 24px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
       border: none;
-      padding: 10px 20px;
-      margin: 5px;
-      border-radius: 8px;
+      border-radius: 6px;
       cursor: pointer;
-      transition: 0.3s;
-      font-weight: bold;
+      margin: 10px;
     }
-
     button:hover {
-      background-color: rgba(255,255,255,0.2);
+      background-color: #45a049;
     }
-
-    @media (max-width: 500px) {
-      h1 {
-        font-size: 22px;
-      }
+    #nama {
+      margin-top: 30px;
+      font-size: 20px;
+      color: #444;
+      font-weight: bold;
+      white-space: pre-line;
+    }
+    #copyArea {
+      position: absolute;
+      left: -9999px;
     }
   </style>
 </head>
 <body>
-
-  <h1>JOE CREATE NAME FB</h1>
-
-  <div class="nama-box" id="namaList">
-    <p>Klik tombol di bawah untuk generate nama acak.</p>
-  </div>
-
-  <div>
-    <button onclick="generateNama()">Generate 10 Nama</button>
-    <button onclick="salinNama()">Salin Semua</button>
-  </div>
+  <h1>🔥💦JOE CREATE NAME💦🔥</h1>
+  <button onclick="generateNama(1)">Generate 1 Nama</button>
+  <button onclick="generateNama(10)">Generate 10 Nama</button>
+  <button onclick="salinNama()">Salin Nama</button>
+  <div id="nama">Klik tombol di atas untuk memulai!</div>
+  <textarea id="copyArea"></textarea>
 
   <script>
-    const daftarNama = [
-      "Rizwan Alfarizi", "Dimas Prasetya", "Bagas Hidayat", "Fahmi Ramadhan", "Ilham Setiawan",
-      "Reza Maulana", "Agung Pradana", "Gilang Saputra", "Bima Prakoso", "Naufal Rizqi",
-      "Ardiansyah Putra", "Dandy Firmansyah", "Riyan Nugraha", "Zaky Hidayat", "Raka Permana",
-      "Aditya Saputra", "Rio Wibowo", "Andra Kurniawan", "Farhan Malik", "Fikri Ramadhan",
-      "Kevin Ananda", "Bayu Kristanto", "Yusuf Fadhil", "Rendy Kurnia", "Dika Septian",
-      "Ammar Rizky", "Arya Wirawan", "Iqbal Satrio", "Jodi Saputra", "Fauzan Pratama",
-    ];
+    const daftarNama = ['Yusuf Santoso', 'Syahrul Basri', 'Ahmad Sutrisno', 'Yoga Saputra', 'Prasetyo Supriyadi', 'Wawan Hidayat', 'Yogi Saputro', 'Naufal Iskandar', 'Toni Wahyudi', 'Fajar Kurniawan', 'Galih Sukmawan', 'Zidan Hidayat', 'Oka Firmansyah', 'Iqbal Santoso', 'Dedi Suryadi', 'Verdi Ardiansyah', 'Galih Yulianto', 'Dimas Santoso', 'Gunawan Fadillah', 'Naufal Fauzi', 'Halim Santoso', 'Cahyo Febrianto', 'Syamsul Putrawan', 'Edi Kurniawan', 'Nugroho Nugraha', 'Rizal Saputro', 'Wawan Yunanto', 'Edi Supriyadi', 'Putra Putrawan', 'Budi Nugraha', 'Doni Firmansyah', 'Umar Syahputra', 'Lutfi Wahyudi', 'Ilham Santoso', 'Ari Anggara', 'Nanang Hardian', 'Dimas Ardiansyah', 'Lukman Pratama', 'Imam Wibisono', 'Syahrul Gunarto', 'Usman Permana', 'Galih Nugraha', 'Qomar Septian', 'Nugroho Prasetya', 'Yusuf Yulianto', 'Yudha Saputro', 'Junaedi Purnomo', 'Prasetyo Syahputra', 'Lutfi Febrianto', 'Candra Wahyudi', 'Syamsul Wahyudi', 'Satria Susanto', 'Bagus Sutrisno', 'Yoga Riyadi', 'Dimas Rahmat', 'Yusuf Fadillah', 'Lukman Kusuma', 'Nanang Pratama', 'Lutfi Yulianto', 'Umar Iskandar', 'Nanang Suryadi', 'Heru Anwar', 'Kusnadi Basri', 'Naufal Pratama', 'Imam Wijaya', 'Dede Wijaya', 'Nanang Sukmawan', 'Heru Wijaya', 'Lukman Suprapto', 'Lazuardi Sutrisno', 'Sandi Sasmita', 'Nanang Hakim', 'Roni Firmansyah', 'Verdi Sukmawan', 'Fajar Fauzi', 'Syahrul Subekti', 'Dede Sukmawan', 'Yudha Wibisono', 'Dimas Ridwan', 'Joko Setiawan', 'Udin Suhendra', 'Zulfan Suhendra', 'Oka Syahputra', 'Ilham Wijaya', 'Lukman Rahmat', 'Dimas Permana', 'Hafiz Nugraha', 'Gilang Supriyadi', 'Galih Suryadi', 'Mulyadi Suhendra', 'Umar Prasetya', 'Khoirul Nugraha', 'Lukman Suryadi', 'Qomar Hardian', 'Nugroho Gunarto', 'Riyan Hardian', 'Udin Yulianto', 'Reza Putrawan', 'Syamsul Saputro', 'Ilham Febrianto', 'Hendra Susanto', 'Mulyadi Kusuma', 'Heru Yunanto', 'Wawan Suprapto', 'Galih Syahputra', 'Dimas Afandi', 'Zidan Wahyudi', 'Mulyadi Ardiansyah', 'Gilang Riyadi', 'Teguh Yunanto', 'Ari Hidayat', 'Naufal Septian', 'Heru Suprapto', 'Iqbal Handoko', 'Iqbal Wibowo', 'Edi Nugraha', 'Satria Setiawan', 'Oki Wijaya', 'Eko Kusuma', 'Naufal Saputro', 'Kusnadi Suprapto', 'Khoirul Pratama', 'Julius Hakim', 'Naufal Hakim', 'Wawan Susanto', 'Usman Nugraha', 'Lutfi Riyadi', 'Halim Wahyudi', 'Eko Basri', 'Nanang Yunanto', 'Surya Susanto', 'Kusnadi Iskandar', 'Nanang Susanto', 'Heru Putrawan', 'Galih Hardian', 'Aditya Subekti', 'Bambang Handoko', 'Zidan Suprapto', 'Edi Hakim', 'Syahrul Sutrisno', 'Gilang Santoso', 'Agus Rahmat', 'Ahmad Ramadhan', 'Khoirul Ramadhan', 'Fajar Hardian', 'Maulana Hidayat', 'Qomar Suryadi', 'Edi Hardian', 'Candra Wibisono', 'Eko Afandi', 'Mulyadi Hakim', 'Riyan Wibowo', 'Agus Wibisono', 'Galih Pratama', 'Rizal Syahputra', 'Cahyo Wibowo', 'Imam Hidayat', 'Rizal Suhendra', 'Taufik Febrianto', 'Mulyadi Saputra', 'Oka Ardiansyah', 'Ilham Purnomo', 'Rudi Anwar', 'Yudha Permana', 'Surya Fadillah', 'Endang Rochmat', 'Riyan Pratama', 'Umar Putrawan', 'Fikri Afandi', 'Sandi Yulianto', 'Toni Suprapto', 'Hendra Prasetya', 'Nugroho Subekti', 'Prasetyo Sasmita', 'Bambang Afandi', 'Toni Santoso', 'Julius Handoko', 'Mulyadi Susanto', 'Candra Afandi', 'Zulfan Kusuma', 'Cahyo Pratama', 'Galih Wijaya', 'Heru Wahyudi', 'Naufal Setiawan', 'Nugroho Afandi', 'Zidan Afandi', 'Agus Yulianto', 'Yudha Rahmat', 'Zaki Anwar', 'Dede Anggara', 'Yusuf Ardiansyah', 'Zaki Setiawan', 'Heru Firmansyah', 'Junaedi Firmansyah', 'Umar Yulianto', 'Dedi Firmansyah', 'Verdi Anggara', 'Rizky Pratama', 'Khoirul Yulianto', 'Wawan Suryadi', 'Maulana Basri', 'Riyan Fauzi', 'Wawan Pratama', 'Maulana Firmansyah', 'Edi Permana', 'Galih Purnomo', 'Ari Gunarto', 'Wawan Supriyadi', 'Lukman Sukmawan', 'Heru Pratama', 'Agus Sutrisno', 'Imam Kusuma', 'Taufik Wahyudi', 'Nanang Rahmat', 'Ari Subekti', 'Kusnadi Hardian', 'Gunawan Handoko', 'Ilham Ramadhan', 'Endang Santoso', 'Riyan Sasmita', 'Taufik Pratama', 'Lazuardi Saputra', 'Yusuf Wibisono', 'Fajar Ardiansyah', 'Teguh Setiawan', 'Joko Rahmat', 'Yoga Afandi', 'Sandi Prasetya', 'Rizky Wibisono', 'Khoirul Wibowo', 'Budi Purnomo', 'Putra Yunanto', 'Lutfi Basri', 'Fauzan Saputra', 'Rizal Firmansyah', 'Halim Kurniawan', 'Wahyu Wibowo', 'Dimas Firmansyah', 'Lazuardi Iskandar', 'Dede Susanto', 'Reza Sutrisno', 'Prasetyo Suhendra', 'Aditya Purnomo', 'Hendra Suprapto', 'Syahrul Ridwan', 'Cahyo Suhendra', 'Joko Firmansyah', 'Ahmad Fauzi', 'Hafiz Subekti', 'Joko Afandi', 'Lukman Setiawan', 'Hendra Saputro', 'Sandi Fauzi', 'Nanang Yulianto', 'Roni Hakim', 'Joko Kusuma', 'Endang Yulianto', 'Umar Fadillah', 'Qomar Pratama', 'Qomar Supriyadi', 'Dimas Saputro', 'Hafiz Putrawan', 'Gunawan Susanto', 'Naufal Firmansyah', 'Oka Rochmat', 'Lutfi Anggara', 'Rafi Suprapto', 'Kusnadi Fauzi', 'Hendra Permana', 'Khoirul Firmansyah', 'Rizal Supriyadi', 'Agus Sukmawan', 'Umar Anggara', 'Yudha Anwar', 'Wawan Fauzi', 'Eko Hidayat', 'Yogi Syahputra', 'Rizal Wibowo', 'Lukman Fadillah', 'Eko Suprapto', 'Fajar Nugraha', 'Surya Saputro', 'Ilham Pratama', 'Gunawan Hakim', 'Imam Prasetya', 'Fikri Maulana', 'Zidan Purnomo', 'Maulana Rochmat', 'Imam Handoko', 'Budi Handoko', 'Iqbal Rochmat', 'Rizky Kurniawan', 'Zaki Purnomo', 'Rudi Firmansyah', 'Dedi Gunarto', 'Verdi Putrawan', 'Rudi Santoso', 'Rizky Basri', 'Oka Wibowo', 'Zidan Rochmat', 'Verdi Firmansyah', 'Wawan Riyadi', 'Syamsul Ridwan', 'Sandi Permana', 'Yoga Suryadi', 'Junaedi Prasetya', 'Rizal Maulana', 'Ari Handoko', 'Putra Septian', 'Bagus Hardian', 'Kusnadi Prasetya', 'Endang Rahmat', 'Lutfi Handoko', 'Udin Ardiansyah', 'Riyan Santoso', 'Nugroho Supriyadi', 'Ahmad Wibowo', 'Yogi Iskandar', 'Aditya Prasetya', 'Bayu Rahmat', 'Wawan Setiawan', 'Zulfan Pratama', 'Galih Sutrisno', 'Prasetyo Saputro', 'Zidan Pratama', 'Bambang Sukmawan', 'Dedi Wibisono', 'Yudha Sutrisno', 'Hendra Nugraha', 'Zaki Wahyudi', 'Prasetyo Putrawan', 'Naufal Ardiansyah', 'Joko Pratama', 'Bayu Suryadi', 'Verdi Maulana', 'Rizky Ridwan', 'Verdi Saputra', 'Udin Wibisono', 'Rafi Ramadhan', 'Reza Maulana', 'Edi Sutrisno', 'Sandi Rahmat', 'Junaedi Nugraha', 'Naufal Nugraha', 'Gilang Ardiansyah', 'Yoga Ardiansyah', 'Junaedi Basri', 'Fauzan Suhendra', 'Aditya Anggara', 'Naufal Wibowo', 'Nugroho Sukmawan', 'Wawan Iskandar', 'Yudha Ardiansyah', 'Dede Putrawan', 'Doni Sasmita', 'Toni Firmansyah', 'Rizal Santoso', 'Budi Saputro', 'Agus Susanto', 'Julius Subekti', 'Wahyu Prasetya', 'Satria Rochmat', 'Lukman Saputra', 'Nugroho Ardiansyah', 'Rizal Septian', 'Gilang Wibisono', 'Yudha Ramadhan', 'Lukman Wijaya', 'Verdi Purnomo', 'Rafi Rahmat', 'Yusuf Afandi', 'Gilang Setiawan', 'Candra Firmansyah', 'Surya Wibisono', 'Yogi Sasmita', 'Edi Saputro', 'Dedi Sutrisno', 'Rudi Prasetya', 'Zulfan Syahputra', 'Naufal Putrawan', 'Maulana Santoso', 'Heru Handoko', 'Syahrul Suhendra', 'Oki Putrawan', 'Naufal Sutrisno', 'Reza Pratama', 'Julius Nugraha', 'Taufik Basri', 'Wahyu Anwar', 'Lutfi Rochmat', 'Yogi Fauzi', 'Iqbal Suhendra', 'Wahyu Kurniawan', 'Syahrul Iskandar', 'Dimas Wibowo', 'Doni Nugraha', 'Taufik Santoso', 'Qomar Purnomo', 'Roni Suprapto', 'Bagus Saputro'];
 
-    function getRandomNama(n = 10) {
-      const shuffled = daftarNama.sort(() => 0.5 - Math.random());
-      return shuffled.slice(0, n);
-    }
-
-    function generateNama() {
-      const list = getRandomNama();
-      const namaHTML = list.map(n => `<div class="nama-item">${n}</div>`).join('');
-      document.getElementById('namaList').innerHTML = namaHTML;
+    function generateNama(jumlah) {
+      let hasil = "";
+      for (let i = 0; i < jumlah; i++) {
+        const randomIndex = Math.floor(Math.random() * daftarNama.length);
+        hasil += daftarNama[randomIndex] + (i < jumlah - 1 ? "\n" : "");
+      }
+      document.getElementById("nama").textContent = hasil;
     }
 
     function salinNama() {
-      const text = Array.from(document.querySelectorAll('.nama-item'))
-                        .map(el => el.innerText).join('\n');
-      navigator.clipboard.writeText(text).then(() => {
-        alert('Nama berhasil disalin!');
-      });
+      const isi = document.getElementById("nama").textContent;
+      const copyArea = document.getElementById("copyArea");
+      copyArea.value = isi;
+      copyArea.select();
+      copyArea.setSelectionRange(0, 99999); // Mobile support
+      document.execCommand("copy");
+      alert("Nama berhasil disalin!");
     }
   </script>
-
 </body>
 </html>
